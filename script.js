@@ -6,9 +6,10 @@ button.addEventListener('click', function() {
   const geojson_original = textarea.value;
   if(geojson_original.length > 0) {
     const errors = geojsonhint.hint(JSON.parse(geojson_original));
+    console.log(errors)
     if(errors.length > 0) {
       const rewinder = new GeoJSONRewind();
-      let newGeoJSON = rewinder.rewind(geojson_original);
+      let newGeoJSON = rewinder.rewind(JSON.parse(geojson_original));
       downloadObjectAsJson(newGeoJSON, 'rewound-geojson.json');
       loader.style.display = 'none';
     } else {
